@@ -1,0 +1,122 @@
+{% include 'authorheader.html' %}
+
+<div class="jumbotron d-flex align-items-center" style="background-image: url(/static/img/tr4.jpg);">
+  <div class="container text-center">
+   <!--  <h1 class="display-1 mb-4">RO<br>XY</h1> -->
+   <center>
+      {% if updater %}
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+              <h2>Update {{updater.0.title}}</h2>
+              <table class="table" style="width: 500px">
+              <tr>
+              <th>Title</th>
+              <td><input type="text" name="title" class="form-control" value="{{updater.0.title}}"></td>
+              </tr>
+              
+              <tr>
+              <td colspan="2" align="center"><input type="submit" name="update" value="update" class="btn btn-primary"></td>
+              </tr>
+
+              </table>
+      </form>
+      {% elif allReview %}
+        {% if allReview != 'No' %}
+            <h1>Reviews about {{allReview.0.book}} Book</h1>
+                <table class="table">
+                <tr>
+                    <th>Sl.no</th>
+                    <th>Review</th>
+                    <th>User</th>
+                    <th>Rating  </th>
+                    
+                </tr>  
+                {% for i in allReview %} 
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.review}}</td>
+                    <td>{{i.user.first_name}}</td>
+                    <td>{{i.rating}}</td>
+                          
+                </tr>
+                {% endfor %}
+                </table>    
+          {% else %}
+             <h1>No Reviews Added Yet</h1>   
+          {%endif%}
+
+  {% else %}
+		   						
+<form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+<h2>MANAGE</h2>
+<table class="table" style="width: 500px">
+<tr>
+<th>Title</th>
+<td><input type="text" name="title" class="form-control" ></td>
+</tr>
+
+<tr>
+<td colspan="2" align="center"><input type="submit" name="submit" value="submit" class="btn btn-primary"></td>
+</tr>
+
+</table>
+</form>
+
+          {% if list %}
+              <h1>Your Books</h1>
+              <table class="table">
+              <tr>
+                  <th>Title</th>
+                  <th>Rating</th>
+                  
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <th>View Reviews</th>
+              </tr>  
+              {% for i in list %} 
+              <tr>
+                  <td>{{i.title}}</td>
+                  <td>{{i.total_rating}}</td>
+                  
+                  
+                  <td><a href="?action=update&id={{i.id}}" class="btn btn-primary">Update</a></td>
+                  <td><a href="?action=delete&id={{i.id}}" class="btn btn-primary">Delete</a></td>
+                  <td><a href="?action=review&id={{i.id}}" class="btn btn-primary">Reviews</a></td>
+              </tr>
+              {% endfor %}
+              </table>
+          {% endif%}
+							
+     {% endif %}                       
+    </center>
+  </div>
+<!--   <div class="rectangle-1"></div>
+  <div class="rectangle-2"></div>
+  <div class="rectangle-transparent-1"></div>
+  <div class="rectangle-transparent-2"></div> -->
+  <div class="circle-1"></div>
+  <div class="circle-2"></div>
+  <div class="circle-3"></div>
+  <div class="triangle triangle-1">
+  	<img src="/static/img/obj_triangle.png" alt="">
+  </div>
+  <div class="triangle triangle-2">
+  	<img src="/static/img/obj_triangle.png" alt="">
+  </div>
+  <div class="triangle triangle-3">
+  	<img src="/static/img/obj_triangle.png" alt="">
+  </div>
+  <div class="triangle triangle-4">
+  	<img src="/static/img/obj_triangle.png" alt="">
+  </div>
+</div>	
+
+ 
+		   						
+		   			
+
+
+			
+
+{% include 'footer.html' %}
